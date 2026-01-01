@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ترازنامه</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-left">
+      <h1 id="companyName">ترازنامه شرکت</h1>
+      <p id="currentDate">در تاریخ</p>
+    </div>
+    <div class="header-right">
+      <button id="resetBtn" title="ریست کل">♻️</button>
+      <button id="addBtn" title="افزودن آیتم جدید">➕</button>
+      <button id="theme" title="تغییر حالت">🌙</button>
+      <button id="print-button" title="چاپ / PDF">🖨️</button>
+    </div>
+  </header>
+
+  <div class="balance-container">
+    <div class="side" id="assetsSide">
+      <h2 class="section-title">دارایی‌ها</h2>
+      <div id="assetsContent"></div>
+      <div class="total"><span>جمع کل دارایی‌ها:</span> <strong id="assetsTotal">0</strong></div>
+    </div>
+
+    <div class="side" id="liabilitiesSide">
+      <h2 class="section-title">بدهی‌ها و سرمایه</h2>
+      <div id="liabilitiesContent"></div>
+      <div class="total"><span>جمع بدهی‌ها و سرمایه:</span> <strong id="liabilitiesTotal">0</strong></div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h2>تحلیل ترازنامه</h2>
+    <canvas id="balanceChart"></canvas>
+  </div>
+
+  <div class="form-container">
+    <h2>افزودن آیتم جدید</h2>
+    <form id="balanceForm">
+      <label>نوع آیتم:</label>
+      <select id="type" required>
+        <option value="">انتخاب کنید</option>
+        <option value="asset">دارایی</option>
+        <option value="liability">بدهی</option>
+        <option value="equity">سرمایه</option>
+      </select>
+
+      <div id="categoryWrapper">
+        <label>طبقه:</label>
+        <select id="category">
+          <option value="">انتخاب کنید</option>
+          <option value="current">جاری</option>
+          <option value="noncurrent">غیرجاری</option>
+        </select>
+      </div>
+
+      <label>عنوان:</label>
+      <input type="text" id="title" placeholder="مثلاً حساب‌های پرداختنی" required>
+
+      <label>مقدار:</label>
+      <input type="number" id="amount" placeholder="مثلاً 2000000" required>
+
+      <label>نوع ثبت:</label>
+      <select id="side" required>
+        <option value="">انتخاب کنید</option>
+        <option value="debit">دبیت</option>
+        <option value="credit">کردیت</option>
+      </select>
+
+      <button type="submit">ثبت آیتم</button>
+    </form>
+  </div>
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <h3>ویرایش آیتم</h3>
+      <label>عنوان:</label>
+      <input type="text" id="editTitle">
+
+      <label>مقدار:</label>
+      <input type="number" id="editAmount">
+
+      <label>نوع ثبت:</label>
+      <select id="editSide">
+        <option value="debit">دبیت</option>
+        <option value="credit">کردیت</option>
+      </select>
+
+      <div class="modal-actions">
+        <button id="saveEdit">ذخیره</button>
+        <button id="cancelEdit" class="cancel">انصراف</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="backToTop" title="بازگشت به بالا">⬆</button>
+</body>
+<script src="script.js"></script>
+
+</html>
